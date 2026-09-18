@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PP6 School System</title>
+  <style>
+    :root{
+      --blue:#17365f;
+      --blue2:#2563eb;
+      --green:#16805c;
+      --bg:#f5f7fb;
+      --card:#fff;
+      --text:#1e293b;
+      --muted:#64748b;
+      --border:#dbe4ef;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;background:var(--bg);color:var(--text);
+      font-family:"TH Sarabun New","Sarabun",Tahoma,sans-serif;
+      font-size:19px;line-height:1.2;
+    }
+    .topbar{
+      background:#fff;border-bottom:1px solid var(--border);
+      min-height:58px;display:flex;align-items:center;
+      padding:8px 18px;gap:14px;position:sticky;top:0;z-index:10;
+    }
+    .brand{display:flex;align-items:center;gap:10px;min-width:250px}
+    .brand img{width:34px;height:34px;object-fit:contain}
+    .brand b{font-size:22px;color:var(--blue)}
+    .period{margin-left:auto;display:flex;gap:8px;align-items:center}
+    select,button{
+      font:inherit;font-size:19px;min-height:42px;
+      border:1px solid var(--border);border-radius:8px;background:#fff;
+    }
+    select{padding:4px 9px}
+    button{padding:5px 12px;cursor:pointer}
+    button.primary{background:var(--blue2);color:#fff;border-color:var(--blue2)}
+    button.secondary{background:#eef4ff;color:var(--blue2)}
+    .wrap{max-width:1200px;margin:22px auto;padding:0 18px}
+    .hero{
+      background:linear-gradient(135deg,#17365f,#2563eb);
+      color:#fff;border-radius:16px;padding:22px;
+      box-shadow:0 8px 24px rgba(23,54,95,.15);
+    }
+    .hero h1{margin:0 0 4px;font-size:34px}
+    .hero p{margin:0;font-size:20px}
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
+    .card{
+      background:var(--card);border:1px solid var(--border);border-radius:14px;
+      padding:16px;box-shadow:0 4px 12px rgba(15,23,42,.04)
+    }
+    .kpi .label{font-size:17px;color:var(--muted)}
+    .kpi .value{font-size:32px;font-weight:800;margin-top:5px}
+    .section{margin-top:16px}
+    .section h2{font-size:26px;margin:0 0 10px}
+    .status{display:inline-flex;gap:7px;align-items:center}
+    .dot{width:10px;height:10px;border-radius:50%;background:#16a34a}
+    pre{
+      white-space:pre-wrap;background:#0f172a;color:#e2e8f0;padding:14px;
+      border-radius:10px;overflow:auto;font-family:ui-monospace,monospace;font-size:13px;
+    }
+    @media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}.period{margin-left:0}.topbar{flex-wrap:wrap}}
+    @media (max-width:560px){.grid{grid-template-columns:1fr}.brand b{font-size:20px}.hero h1{font-size:29px}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <img src="assets/logo_school.png" alt="โลโก้โรงเรียน">
+      <b>ระบบ ปพ.6 โรงเรียนวัดไตรสามัคคี</b>
+    </div>
+    <div class="period">
+      <label for="year">ปีการศึกษา</label>
+      <select id="year"></select>
+      <label for="term">ภาคเรียน</label>
+      <select id="term">
+        <option value="1">1</option>
+        <option value="2">2</option>
+      </select>
+      <button class="secondary" id="refreshBtn">รีเฟรช</button>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="status"><span class="dot"></span> ระบบเชื่อมต่อ API</div>
+      <h1>Dashboard</h1>
+      <p>หน้าเว็บโหลดจาก Cloudflare Pages และเรียกข้อมูลจาก Google Apps Script API</p>
+    </section>
+
+    <section class="grid">
+      <div class="card kpi"><div class="label">รายวิชา</div><div class="value" id="kpiSubjects">—</div></div>
+      <div class="card kpi"><div class="label">ห้องเรียน</div><div class="value" id="kpiClasses">—</div></div>
+      <div class="card kpi"><div class="label">นักเรียน</div><div class="value" id="kpiStudents">—</div></div>
+      <div class="card kpi"><div class="label">การมอบหมาย</div><div class="value" id="kpiAssignments">—</div></div>
+    </section>
+
+    <section class="section card">
+      <h2>ทดสอบ API</h2>
+      <button class="primary" id="loadBtn">โหลดข้อมูล Dashboard</button>
+      <pre id="output">กดปุ่มเพื่อเรียก API</pre>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
